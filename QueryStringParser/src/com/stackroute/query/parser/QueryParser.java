@@ -30,7 +30,7 @@ public class QueryParser {
 		List<String> orderByFieldList=null;
 		if(hasOrderByField(queryString))
 		{
-			String orderByFields[] = queryString.split("\\s+group by\\s+")[1].split("\\s+order by\\s+")[0].split(",");
+			String orderByFields[] = queryString.split("\\s+order by\\s+")[1].split("\\s+group by\\s+")[0].split(",");
 			orderByFieldList = new ArrayList<>();
 			for (String  orderByField : orderByFields) {
 				orderByFieldList.add(orderByField);
@@ -44,7 +44,7 @@ public class QueryParser {
 		List<String> groupByFieldList=null;
 		if(hasOrderByField(queryString))
 		{
-			String groupByFields[] = queryString.split("\\s+order by\\s+")[1].split(",");
+			String groupByFields[] = queryString.split("\\s+group by\\s+")[1].split("\\s+order by\\s+")[0].split(",");
 			groupByFieldList = new ArrayList<>();
 			for (String  groupByField : groupByFields) {
 				groupByFieldList.add(groupByField);
