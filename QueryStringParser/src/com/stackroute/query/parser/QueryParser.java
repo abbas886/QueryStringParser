@@ -10,7 +10,7 @@ public class QueryParser {
 
 	public QueryParameter parseQuery(String queryString) {
 		queryParameter.setQueryString(queryString);
-
+		queryParameter.setQUERY_TYPE("SIMPLE_QUERY");
 		String baseQuery = queryString.split("where")[0];
 		queryParameter.setBaseQuery(baseQuery);
 
@@ -42,7 +42,7 @@ public class QueryParser {
 	
 	private List<String> getGroupByFields(String queryString) {
 		List<String> groupByFieldList=null;
-		if(hasOrderByField(queryString))
+		if(hasGroupByField(queryString))
 		{
 			String groupByFields[] = queryString.split("\\s+group by\\s+")[1].split("\\s+order by\\s+")[0].split(",");
 			groupByFieldList = new ArrayList<>();
@@ -57,6 +57,15 @@ public class QueryParser {
 	private boolean hasOrderByField(String queryString) {
 		if(queryString.contains("order by"))
 		{
+			if(queryParameter.getQUERY_TYPE().equals("GROUPE_BY_QUERY"))
+			{
+				queryParameter.setQUERY_TYPE("GROUPE_BY_ORDER_BY_QUERY");
+			}
+			else
+			{
+				queryParameter.setQUERY_TYPE("ORDER_BY_QUERY");
+			}
+			
 			return true;
 		}
 		else
@@ -69,6 +78,15 @@ public class QueryParser {
 	private boolean hasGroupByField(String queryString) {
 		if(queryString.contains("group by"))
 		{
+			if(queryParameter.getQUERY_TYPE().equals("ORDER_BY_QUERY"))
+			{
+				queryParameter.setQUERY_TYPE("GROUPE_BY_ORDER_BY_QUERY");
+			}
+			else
+			{
+				queryParameter.setQUERY_TYPE("GROUPE_BY_QUERY");
+			}
+			
 			return true;
 		}
 		else
@@ -182,6 +200,7 @@ public class QueryParser {
 
 		if (queryString.contains("sum") || queryString.contains("min") || queryString.contains("max")
 				|| queryString.contains("avg") || queryString.contains("count")) {
+			queryParameter.setQUERY_TYPE("AGGREGATE_QUERY");
 			return true;
 		}
 		return false;

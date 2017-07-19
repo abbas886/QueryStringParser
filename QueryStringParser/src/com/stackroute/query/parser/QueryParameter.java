@@ -1,6 +1,5 @@
 package com.stackroute.query.parser;
 
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -32,6 +31,19 @@ public class QueryParameter {
 	
 	private List<String> orderByFields;
 	
+	//Query type may be simple, group by, order by, aggregate
+	private String QUERY_TYPE ="SIMPLE_QUERY";
+	
+	
+
+	
+	public String getQUERY_TYPE() {
+		return QUERY_TYPE;
+	}
+
+	public void setQUERY_TYPE(String qUERY_TYPE) {
+		QUERY_TYPE = qUERY_TYPE;
+	}
 
 	
 	public String getFile() {

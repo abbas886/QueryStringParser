@@ -34,22 +34,6 @@ public class QueryBuilderTestCase {
 	}
 
 	@Test
-	public void getBaseQueryTestCase() {
-		queryString = "select * from employe.csv";
-		queryParameter = queryParser.parseQuery(queryString);
-		assertEquals("select * from employe.csv", queryParameter.getBaseQuery());
-		display(queryString, queryParameter);
-	}
-
-	@Test
-	public void getQueryStringTestCase() {
-		queryString = "select * from employe.csv";
-		queryParameter = queryParser.parseQuery(queryString);
-		assertEquals("select * from employe.csv", queryParameter.getBaseQuery());
-		display(queryString, queryParameter);
-	}
-
-	@Test
 	public void getFieldsTestCase() {
 		queryString = "select id, name, salary from employe.csv";
 		queryParameter = queryParser.parseQuery(queryString);
@@ -82,7 +66,7 @@ public class QueryBuilderTestCase {
 	}
 	
 	@Test
-	public void getRestrictionsAndAggregateFunctionsAndGroupByTestCase() {
+	public void getGrouByAndOrderByTestCase() {
 		queryString = "select id,name,salary, department from employe.csv where salary>10000 and department = 'HR' group by department order by salary";
 		queryParameter = queryParser.parseQuery(queryString);
 		List<Restriction> restrictions = queryParameter.getRestrictions();
@@ -90,12 +74,33 @@ public class QueryBuilderTestCase {
 		
 		display(queryString, queryParameter);
 	}
+	@Test
+	public void getGrouByTestCase() {
+		queryString = "select  department, count(*) from employe.csv where salary>10000 group by department";
+		queryParameter = queryParser.parseQuery(queryString);
+		List<Restriction> restrictions = queryParameter.getRestrictions();
+		assertNotNull(restrictions);;
+		
+		display(queryString, queryParameter);
+	}
+
+	@Test
+	public void getOrderByTestCase() {
+		queryString = "select id,name,salary, department from employe.csv where salary>10000 and department = 'HR' order by salary";
+		queryParameter = queryParser.parseQuery(queryString);
+		List<Restriction> restrictions = queryParameter.getRestrictions();
+		assertNotNull(restrictions);;
+		
+		display(queryString, queryParameter);
+	}
+
 
 	private void display(String queryString, QueryParameter queryParameter) {
 		System.out.println("\nQuery : " + queryString);
 		System.out.println("--------------------------------------------------");
 		System.out.println("Base Query:" + queryParameter.getBaseQuery());
 		System.out.println("File:" + queryParameter.getFile());
+		System.out.println("Query Type:" + queryParameter.getQUERY_TYPE());
 		List<String> fields = queryParameter.getFields();
 
 		System.out.println("Selected field(s):");
