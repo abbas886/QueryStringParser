@@ -114,7 +114,7 @@ public class QueryParser {
 		List<Restriction> restrictions = null;
 		if (queryString.contains("where")) {
 
-			String whereClauseQuery = queryString.split("where")[1];
+			String whereClauseQuery = queryString.split("where")[1].split("order by")[0].split("group by")[0];
 
 			String[] expressions = whereClauseQuery.split("\\s+and\\s+|\\s+or\\s+");
 
@@ -180,13 +180,17 @@ public class QueryParser {
 			AggregateFunction agregateFunction;
 			for (int i = 0; i < size; i++) {
 				aggregate = aggregateFunctions[i].trim();
-				function = aggregate.split("\\(")[0].trim();
-				aggregateField = aggregate.split("\\(")[1].trim().split("\\)")[0];
-				agregateFunction = new AggregateFunction();
-				agregateFunction.setField(aggregateField);
-				agregateFunction.setFunction(function);
+				if(aggregate.contains("("))
+				{
+					function = aggregate.split("\\(")[0].trim();
+					aggregateField = aggregate.split("\\(")[1].trim().split("\\)")[0];
+					agregateFunction = new AggregateFunction();
+					agregateFunction.setField(aggregateField);
+					agregateFunction.setFunction(function);
 
-				agregateFunctionList.add(agregateFunction);
+					agregateFunctionList.add(agregateFunction);
+				}
+				
 
 			}
 
