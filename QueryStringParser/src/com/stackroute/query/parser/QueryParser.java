@@ -11,10 +11,10 @@ public class QueryParser {
 	public QueryParameter parseQuery(String queryString) {
 		queryParameter.setQueryString(queryString);
 		queryParameter.setQUERY_TYPE("SIMPLE_QUERY");
-		String baseQuery = queryString.split("where")[0];
+		String baseQuery = queryString.split("where|ordery by|group by")[0];
 		queryParameter.setBaseQuery(baseQuery);
 
-		String file = baseQuery.split("from")[1];
+		String file = baseQuery.split("from")[1].trim().split("\\s+")[0];
 		queryParameter.setFile(file.trim());
 		queryParameter.setFields(getFields(baseQuery));
 		queryParameter.setRestrictions(getRescritions());

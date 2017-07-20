@@ -94,6 +94,7 @@ public class QueryBuilderTestCase {
 		display(queryString, queryParameter);
 	}
 	
+		
 	@Test
 	public void getOrderByTestCase() {
 		queryString = "select city,name,salary from d:/emp.csv where city=Bangalore order by salary";
@@ -103,7 +104,26 @@ public class QueryBuilderTestCase {
 		
 		display(queryString, queryParameter);
 	}
+	@Test
+	public void getOrderByWihtoutWhereTestCase() {
+		queryString = "select city,name,salary from d:/emp.csv  order by salary";
+		queryParameter = queryParser.parseQuery(queryString);
+		List<String> orderByFields = queryParameter.getOrderByFields();
+		assertNotNull(orderByFields);;
+		
+		display(queryString, queryParameter);
+	}
 	
+	@Test
+	public void getGroupeByWithoutWhereTestCase() {
+		queryString = "select department, count(*) from d:/emp.csv group by department";
+		queryParameter = queryParser.parseQuery(queryString);
+		List<String> groupByFields = queryParameter.getGroupByFields();
+		assertNotNull(groupByFields);;
+		
+		display(queryString, queryParameter);
+	}
+
 
 
 	private void display(String queryString, QueryParameter queryParameter) {
