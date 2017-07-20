@@ -1,42 +1,47 @@
 package com.stackroute.query.parser;
 
+import java.util.HashMap;
 import java.util.List;
-
-
+import java.util.Map;
 
 public class QueryParameter {
 
-	
-	//private QueryParser query;
-	
+	// private QueryParser query;
+
 	private String queryString;
-	
+
 	private List<Restriction> restrictions;
-	
+
 	private List<String> logicalOperators;
-	
+
 	private List<AggregateFunction> aggregateFunctions;
-	
 
 	private String file;
-	
-	//query without where condition
+
+	// query without where condition
 	private String baseQuery;
 
-	
-	//Selected fields. If it is null ->  * ( i.e., select all fields)
+	// Selected fields. If it is null -> * ( i.e., select all fields)
 	private List<String> fields;
-	
-	private List<String> groupByFields;
-	
-	private List<String> orderByFields;
-	
-	//Query type may be simple, group by, order by, aggregate
-	private String QUERY_TYPE ="SIMPLE_QUERY";
-	
-	
 
-	
+	private List<String> groupByFields;
+
+	private List<String> orderByFields;
+
+	// Query type may be simple, group by, order by, aggregate
+	private String QUERY_TYPE = "SIMPLE_QUERY";
+
+	// place holder for header
+	private Map<String, Integer> header;
+
+	public Map<String, Integer> getHeader() {
+		return header;
+	}
+
+	public void setHeader(Map<String, Integer> header) {
+		this.header = header;
+	}
+
 	public String getQUERY_TYPE() {
 		return QUERY_TYPE;
 	}
@@ -45,7 +50,6 @@ public class QueryParameter {
 		QUERY_TYPE = qUERY_TYPE;
 	}
 
-	
 	public String getFile() {
 		return file;
 	}
@@ -62,7 +66,6 @@ public class QueryParameter {
 		this.queryString = queryString;
 	}
 
-	
 	public List<Restriction> getRestrictions() {
 		return restrictions;
 	}
@@ -78,7 +81,6 @@ public class QueryParameter {
 	public void setLogicalOperators(List<String> logicalOperators) {
 		this.logicalOperators = logicalOperators;
 	}
-
 
 	public String getBaseQuery() {
 		return baseQuery;
@@ -119,9 +121,5 @@ public class QueryParameter {
 	public void setOrderByFields(List<String> orderByFields) {
 		this.orderByFields = orderByFields;
 	}
-
-	
-	
-
 
 }

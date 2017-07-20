@@ -113,7 +113,8 @@ public class QueryParser {
 
 		List<Restriction> restrictions = null;
 		if (queryString.contains("where")) {
-
+			queryParameter.setQUERY_TYPE("WHERE_CLAUSE_QUERY");
+			
 			String whereClauseQuery = queryString.split("where")[1].split("order by")[0].split("group by")[0];
 
 			String[] expressions = whereClauseQuery.split("\\s+and\\s+|\\s+or\\s+");
