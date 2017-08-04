@@ -97,8 +97,9 @@ public class QueryParser {
 	}
 
 	private List<String> getFields(String baseQuery) {
-
+        //will use arrays.asList???
 		String[] fields = baseQuery.trim().split("select")[1].split("from")[0].trim().split(",");
+		
 		List<String> fieldList = new ArrayList<>();
 		for (String field : fields) {
 			fieldList.add(field.trim());
@@ -179,6 +180,7 @@ public class QueryParser {
 			String aggregateField;
 			List<AggregateFunction> agregateFunctionList = new ArrayList<AggregateFunction>();
 			AggregateFunction agregateFunction;
+			
 			for (int i = 0; i < size; i++) {
 				aggregate = aggregateFunctions[i].trim();
 				if(aggregate.contains("("))
@@ -188,7 +190,6 @@ public class QueryParser {
 					agregateFunction = new AggregateFunction();
 					agregateFunction.setField(aggregateField);
 					agregateFunction.setFunction(function);
-
 					agregateFunctionList.add(agregateFunction);
 				}
 				

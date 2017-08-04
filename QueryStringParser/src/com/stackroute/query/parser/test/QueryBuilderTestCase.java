@@ -168,6 +168,7 @@ public class QueryBuilderTestCase {
 				System.out.println("\t Aggregate Function : " + funtionCount++);
 				System.out.println("\t\t function : "+aggregateFunction.getFunction());
 				System.out.println("\t\t  field : "+aggregateFunction.getField());
+				System.out.println("\t\t  index : "+aggregateFunction.getAggregateFieldIndex());
 			}
 			
 		}

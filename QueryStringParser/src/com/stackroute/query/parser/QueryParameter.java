@@ -1,12 +1,9 @@
 package com.stackroute.query.parser;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class QueryParameter {
-
-	// private QueryParser query;
 
 	private String queryString;
 
@@ -15,6 +12,8 @@ public class QueryParameter {
 	private List<String> logicalOperators;
 
 	private List<AggregateFunction> aggregateFunctions;
+	
+	private Map<String, List<AggregateFunction>> groupBy;
 
 	private String file;
 
@@ -33,6 +32,18 @@ public class QueryParameter {
 
 	// place holder for header
 	private Map<String, Integer> header;
+	
+	//place holder for selected field index
+	private List<Integer> selectedFieldIndexes;
+
+	
+	public List<Integer> getSelectedFieldIndexes() {
+		return selectedFieldIndexes;
+	}
+
+	public void setSelectedFieldIndexes(List<Integer> selectedFieldIndexes) {
+		this.selectedFieldIndexes = selectedFieldIndexes;
+	}
 
 	public Map<String, Integer> getHeader() {
 		return header;
